@@ -141,3 +141,8 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# AeroFlow
+backend/.venv/
+backend/data/mock_data.json
+frontend/.env.local

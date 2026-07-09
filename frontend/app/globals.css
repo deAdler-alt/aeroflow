@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "leaflet/dist/leaflet.css";
+
+html,
+body {
+  height: 100%;
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Leaflet map fills its container and matches the dark theme. */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: #0d1117;
+}
+
+/* Dark popups */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #161b22;
+  color: #e6edf3;
+  border: 1px solid #232b36;
+}
+
+/* Pulsing glow for critical hotspots */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(1.6);
+  }
+}
+
+/* Thin custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #232b36;
+  border-radius: 4px;
+}
