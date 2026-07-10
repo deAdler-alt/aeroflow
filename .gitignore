@@ -145,4 +145,6 @@ vite.config.ts.timestamp-*
 # AeroFlow
 backend/.venv/
 backend/data/mock_data.json
+backend/.env
 frontend/.env.local
+backend/ml/pm25_model.pkl

@@ -1,0 +1,24 @@
+{
+  "algorithm": "RandomForestRegressor",
+  "n_estimators": 200,
+  "n_samples": 6000,
+  "features": [
+    "traffic_density",
+    "wind_speed",
+    "temperature",
+    "road_topology",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "r2": 0.9663,
+  "mae": 5.17,
+  "feature_importances": {
+    "traffic_density": 0.5344,
+    "road_topology": 0.3468,
+    "wind_speed": 0.1043,
+    "temperature": 0.0061,
+    "hour_cos": 0.0048,
+    "hour_sin": 0.0035
+  },
+  "trained_at": "2026-07-10T00:34:59.995946+00:00"
+}

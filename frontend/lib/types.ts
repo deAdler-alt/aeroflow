@@ -40,3 +40,28 @@ export interface ReportResponse {
   model: string;
   source: string;
 }
+
+export interface OptimizeFrame {
+  offset_hours: number;
+  hotspots: Hotspot[];
+}
+
+export interface OptimizeResponse {
+  diversion_pct: number;
+  cars_diverted: number;
+  predicted_peak_optimized: number;
+  predicted_peak_standard: number;
+  reduction_pct: number;
+  engine?: string;
+  frames: OptimizeFrame[];
+}
+
+export interface ModelInfo {
+  loaded: boolean;
+  algorithm: string;
+  r2?: number;
+  mae?: number;
+  n_estimators?: number;
+  n_samples?: number;
+  feature_importances?: Record<string, number>;
+}

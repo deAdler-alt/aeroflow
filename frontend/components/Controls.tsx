@@ -1,6 +1,6 @@
 "use client";
 
-import { Zap, Clock } from "lucide-react";
+import { Zap, Clock, Car, Loader2 } from "lucide-react";
 import type { TimestampFrame } from "@/lib/types";
 
 interface ControlsProps {
@@ -9,6 +9,9 @@ interface ControlsProps {
   onIndexChange: (i: number) => void;
   optimized: boolean;
   onToggleOptimized: (v: boolean) => void;
+  diversionPct: number;
+  onDiversionChange: (v: number) => void;
+  optimizeLoading: boolean;
 }
 
 export default function Controls({
@@ -17,6 +20,9 @@ export default function Controls({
   onIndexChange,
   optimized,
   onToggleOptimized,
+  diversionPct,
+  onDiversionChange,
+  optimizeLoading,
 }: ControlsProps) {
   return (
     <div className="pointer-events-auto absolute bottom-6 left-1/2 z-[1000] w-[min(720px,90%)] -translate-x-1/2 rounded-2xl border border-edge bg-surface/90 p-4 shadow-xl backdrop-blur">
@@ -64,6 +70,37 @@ export default function Controls({
           {optimized ? "AI Optimization ON" : "Optimize Traffic"}
         </button>
       </div>
+
+      {/* Diversion strength — the live input to the backend traffic model */}
+      {optimized && (
+        <div className="mt-3 border-t border-edge pt-3">
+          <div className="mb-2 flex items-center justify-between text-xs text-gray-400">
+            <span className="flex items-center gap-2">
+              <Car size={14} />
+              Traffic diversion strength
+            </span>
+            <span className="flex items-center gap-2 font-semibold text-emerald-300">
+              {optimizeLoading && (
+                <Loader2 size={12} className="animate-spin text-accent" />
+              )}
+              {diversionPct}% diverted
+            </span>
+          </div>
+          <input
+            type="range"
+            min={0}
+            max={80}
+            step={5}
+            value={diversionPct}
+            onChange={(e) => onDiversionChange(Number(e.target.value))}
+            className="w-full accent-emerald-400"
+          />
+          <div className="mt-1 flex justify-between text-[10px] text-gray-600">
+            <span>Do nothing</span>
+            <span>Aggressive re-routing</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

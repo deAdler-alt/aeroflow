@@ -1,13 +1,18 @@
 "use client";
 
 import { Activity, Car, TrendingDown, Radio, FileText, Loader2 } from "lucide-react";
-import type { CityStats, Hotspot } from "@/lib/types";
+import type { CityStats, Hotspot, ModelInfo, TimestampFrame } from "@/lib/types";
 import { LEVEL_COLORS } from "@/lib/api";
+import TrendChart from "./TrendChart";
+import ModelCard from "./ModelCard";
 
 interface AnalyticsPanelProps {
   stats: CityStats;
   hotspots: Hotspot[];
   optimized: boolean;
+  frames: TimestampFrame[];
+  activeIndex: number;
+  modelInfo: ModelInfo | null;
   onGenerateReport: () => void;
   reportLoading: boolean;
 }
@@ -43,6 +48,9 @@ export default function AnalyticsPanel({
   stats,
   hotspots,
   optimized,
+  frames,
+  activeIndex,
+  modelInfo,
   onGenerateReport,
   reportLoading,
 }: AnalyticsPanelProps) {
@@ -90,6 +98,18 @@ export default function AnalyticsPanel({
           accent={LEVEL_COLORS.good}
         />
       </div>
+
+      {/* Forecast trajectory */}
+      <div className="rounded-xl border border-edge bg-panel/50 p-3">
+        <TrendChart
+          frames={frames}
+          activeIndex={activeIndex}
+          optimized={optimized}
+        />
+      </div>
+
+      {/* Prediction engine (Random Forest) */}
+      {modelInfo && <ModelCard info={modelInfo} />}
 
       {/* Hotspot ranking */}
       <div>
